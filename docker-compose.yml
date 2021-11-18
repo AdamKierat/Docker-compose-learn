@@ -11,20 +11,6 @@ services:
       POSTGRES_PASSWORD: root
     networks:
       - keycloak
-  terraform-shell:
-    image: hashicorp/terraform
-    container_name: terraform-shell
-    volumes:
-      - ./terraform:/playground
-    working_dir: /playground
-    entrypoint: /bin/ashmake
-    tty: true
-    depends_on:
-      - keycloak
-      - vault
-    networks:
-      - keycloak
-
   keycloak:
     image: jboss/keycloak
     environment:
