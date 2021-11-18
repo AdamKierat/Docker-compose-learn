@@ -18,8 +18,14 @@ services:
   keycloak:
     image: jboss/keycloak
     environment:
-      - KEYCLOAK_USER=root
-      - KEYCLOAK_PASSWORD=root
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: root
+      DB_USER: root
+      DB_SCHEMA: public
+      DB_PASSWORD: root
+      KEYCLOAK_USER: root
+      KEYCLOAK_PASSWORD: root
     ports:
       - 8080:8080
     networks:
