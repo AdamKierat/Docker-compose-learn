@@ -47,18 +47,8 @@ services:
       - 8080:8080
     depends_on:
       - postgres
-
-  ldap-host:
-    image: osixia/openldap:1.2.4
-    environment:
-      LDAP_ORGANISATION: tsh
-      LDAP_DOMAIN: tsh.io
-      LDAP_ADMIN_PASSWORD: admin
-    ports:
-      - "389:389"
-    volumes:
-      - ./ldifs/example.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/example.ldif
-    command: --copy-service
+    networks:
+      - keycloak
 
   vault:
     image: vault:1.2.1
@@ -82,5 +72,7 @@ services:
     environment:
       - VAULT_ADDR=http://127.0.0.1:8200
     restart: always
+    networks:
+      - keycloak
   networks:
-    - keycloak: null
+    keycloak: null
